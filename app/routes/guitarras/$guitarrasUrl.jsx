@@ -2,6 +2,13 @@ import React from 'react'
 import { useLoaderData } from '@remix-run/react';
 import styles from "../../styles/guitarras.css"
 
+export function meta({data}){
+    return {
+        title: `GuitarLA - ${data.data[0].attributes.nombre}`,
+        description: `Guitarras, venta de guitarras, guitarra ${data.data[0].attributes.nombre}`
+    }
+}
+
 export function links(){
     return [
         {
