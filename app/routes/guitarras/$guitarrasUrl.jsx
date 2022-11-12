@@ -1,5 +1,15 @@
 import React from 'react'
 import { useLoaderData } from '@remix-run/react';
+import styles from "../../styles/guitarras.css"
+
+export function links(){
+    return [
+        {
+            rel: "stylesheet",
+            href: styles
+        }
+    ]
+}
 
 export async function getGuitarra(url){
     const respuesta = await fetch(`${process.env.API_URL}/guitarras?filters[url]=${url}&populate=imagen`);
@@ -18,7 +28,11 @@ const Guitarra = () => {
     return (
         <main className='contenedor guitarra'>
             <img className='imagen' src={imagen.data.attributes.url}/>
-
+            <div className='contenido'>
+                <h3>{nombre}</h3>
+                <p className='texto'>{descripcion}</p>
+                <p className='precio'>${precio}</p>
+            </div>
         </main>
 
     
