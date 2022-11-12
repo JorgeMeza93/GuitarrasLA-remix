@@ -26,7 +26,6 @@ export async function loader(){
 
 const Tienda = () => {
   const guitarras =  useLoaderData();
-  console.log(guitarras);
   return (
     <main className='contnedor'>
       <h2 className="heading">Nuestra Colección</h2>
