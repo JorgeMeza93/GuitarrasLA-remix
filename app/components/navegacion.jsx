@@ -14,7 +14,7 @@ const Navegacion = () => {
         <Link to="/tienda" className={location.pathname === "/tienda" ? "active" : ""}>
             Tienda
         </Link>
-        <Link to="/" className={location.pathname === "/blog" ? "active" : ""}>
+        <Link to="/blog" className={location.pathname === "/blog" ? "active" : ""}>
             Blog
         </Link>
     </nav>
