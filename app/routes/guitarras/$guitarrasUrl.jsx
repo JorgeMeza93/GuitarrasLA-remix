@@ -3,12 +3,17 @@ import { useLoaderData } from '@remix-run/react';
 import styles from "../../styles/guitarras.css"
 
 export function meta({data}){
+    if(!data){
+        return{
+            title: "GuitarLA - Guitarra no encontrada",
+            description: "Guitarra no encontrada. Verificar nombre"
+        }
+    }
     return {
         title: `GuitarLA - ${data.data[0].attributes.nombre}`,
         description: `Guitarras, venta de guitarras, guitarra ${data.data[0].attributes.nombre}`
     }
 }
-
 export function links(){
     return [
         {
@@ -26,6 +31,12 @@ export async function getGuitarra(url){
 export async function loader({params}){
     const { guitarrasUrl } = params
     const guitarra = await getGuitarra(guitarrasUrl);
+    if(guitarra.data.length === 0){
+        throw new Response("", {
+            status: 404,
+            statusText: "Resultado no encontrado"
+        })
+    }
     return guitarra;
 }
 

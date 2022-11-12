@@ -1,4 +1,4 @@
-import { Meta, Links, Outlet, Scripts, LiveReload } from "@remix-run/react";
+import { Meta, Links, Outlet, Scripts, LiveReload, useCatch, Link } from "@remix-run/react";
 import styles from "./styles/index.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -62,5 +62,24 @@ function Document({children}){
                 <LiveReload/>
             </body>
         </html>
+    )
+}
+
+/** Manejo de Errores **/
+export function CatchBoundary(){
+    const error = useCatch();
+    return (
+        <Document>
+            <p className="error">{error.status} {error.statusText}</p>
+            <Link to="/" className="error-enlace">Regresar al inicio</Link>
+        </Document>
+    )
+}
+export function ErrorBoundary({error}){
+    return (
+        <Document>
+            <p className="error">{error.status} {error.statusText}</p>
+            <Link to="/" className="error-enlace" >Regresar al inicio</Link>
+        </Document>
     )
 }
