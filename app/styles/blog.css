@@ -48,3 +48,7 @@
 .post .enlace:hover{
     background-color: var(--primary);
 }
+.post .fecha{
+    font-size: 1.6rem;
+    color: var(--primary);
+}
