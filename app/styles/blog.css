@@ -1,0 +1,50 @@
+.blog{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+}
+@media(min-width: 768px){
+    .blog{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(min-width: 1200px){
+    .blog{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.post{
+
+}
+.post .contenido{
+    padding: 1.5rem;
+}
+.post .contenido h3{
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin: 0;
+}
+.post .resumen{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+
+}
+.post .enlace{
+    margin-top: 2rem;
+    display: block;
+    background-color: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 500ms;
+}
+.post .enlace:hover{
+    background-color: var(--primary);
+}
