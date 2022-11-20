@@ -1,7 +1,8 @@
 import React from 'react'
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, Outlet } from '@remix-run/react';
 import Guitarra from '~/components/guitarra';
 import styles from "../styles/guitarras.css";
+
 
 export function meta(){
   return {
