@@ -4,6 +4,8 @@ import Guitarra from '~/components/guitarra';
 import stylesGuitarras from "../styles/guitarras.css";
 import ListadoPost from "../components/listadoPost";
 import stylesPost from "../styles/blog.css"
+import Curso from "../components/curso"
+import stylesCurso from "../styles/curso.css"
 
 function meta(){
 
@@ -17,6 +19,10 @@ function links(){
     {
       rel: "stylesheet",
       href: stylesPost
+    },
+    {
+      rel: "stylesheet",
+      href: stylesCurso
     }
   ]
 }
@@ -25,14 +31,18 @@ async function loader(){
   const resultado = await respuestaGuitarras.json();
   const respuestaPost = await fetch(`${process.env.API_URL}/posts?populate=imagen`);
   const resultadoPost = await respuestaPost.json();
+  const respuestaCurso = await fetch(`${process.env.API_URL}/curso?populate=imagen`);
+  const resultadoCurso = await respuestaCurso.json();
+  console.log(resultadoCurso);
   return {
-    resultado, resultadoPost
+    resultado, resultadoPost, resultadoCurso
   }
 }
 const Index = () => {
   const datos = useLoaderData();
   const guitarras = datos.resultado.data;
   const posts = datos.resultadoPost.data
+  const curso = datos.resultadoCurso;
   return (
     <>
       <main className='contenedor'>
@@ -48,6 +58,9 @@ const Index = () => {
         </div>
       )}
       </main>
+      <Curso
+        curso={curso.data.attributes}
+      />
       <section className='contenedor'>
         <ListadoPost
           posts={posts}
