@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 import { useLoaderData } from '@remix-run/react';
 import styles from "../../styles/guitarras.css"
 
@@ -41,8 +42,24 @@ export async function loader({params}){
 }
 
 const Guitarra = () => {
+    const [cantidad, setCantidad] = useState(0);
+    
     const guitarra = useLoaderData();
     const { nombre, descripcion, imagen, precio } = guitarra.data[0].attributes;
+    const hadleSubmit = e => {
+        e.preventDefault();
+        if(cantidad < 1){
+            alert("Debe ser mayor a uno")
+        }
+        const guitarraSeleccionada = {
+            id: guitarra.data[0].id,
+            imagen: imagen.data.attributes.url,
+            nombre,
+            precio,
+            cantidad
+        }
+        console.log(guitarraSeleccionada);
+    }
     return (
         <main className='contenedor guitarra'>
             <img className='imagen' src={imagen.data.attributes.url}/>
@@ -50,10 +67,13 @@ const Guitarra = () => {
                 <h3>{nombre}</h3>
                 <p className='texto'>{descripcion}</p>
                 <p className='precio'>${precio}</p>
-                <form className='formulario'>
+                <form className='formulario'
+                    onSubmit={hadleSubmit}
+                >
                     <label htmlFor='select'>Cantidad</label>
-                    <select id='select'>
-                        <option value="">--Seleccione--</option>
+                    <select id='select' 
+                        onChange={ e => setCantidad(parseInt(e.target.value))}>
+                        <option value="0">--Seleccione--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
